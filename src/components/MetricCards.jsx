@@ -65,7 +65,7 @@ export default function MetricCards({ rows = [], filteredRows }) {
       <div className="metric-card explorer-metric-tile explorer-metric-wur">
         <div className="metric-label">Worst state</div>
         <div className="metric-value warning">{stats.worstState || '—'}</div>
-        <div className="metric-sub">Highest count in CSV</div>
+        <div className="metric-sub">Most number of accidents</div>
       </div>
     </div>
   )

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 /** Bump when tour layout or flow changes — returning users see the refreshed tour once. */
-export const EXPLORER_GUIDE_STORAGE_KEY = 'roadsense_explorer_tour_v8'
+export const EXPLORER_GUIDE_STORAGE_KEY = 'roadsense_explorer_tour_v9'
 
 const STEPS = [
   {
@@ -19,23 +19,22 @@ const STEPS = [
     title: 'Filters & navigation',
     lines: [
       'The pills — **All, Highway, Urban, Weather, Night** — drive one shared dataset for the **map**, **right column**, and the **Risk by hour** cell in the footer row.',
-      '**GitHub** opens the repo. **Show tour** (top left) replays this guide whenever you like.'
+      '**GitHub** opens the repo. **Show tour** (top right of the explorer page) replays this guide whenever you like.'
     ]
   },
   {
     kicker: 'Step 3 of 4 · Charts & AI',
     title: 'Right column tabs',
     lines: [
-      '**Top states**, **Causes**, and **Insights** are tabs along the top of the right column. Only **one** view is shown at a time so each chart (or the AI block) can use the full height.',
-      'Open **Insights** after you pick a dot to read **three short Gemini bullets** (exploration only — not legal or medical advice).'
+      '**Top states**, **Causes**, and **Insights** are tabs along the top of the right column. Open **Insights** after you pick a dot to read three short Gemini bullets (exploration only — not legal or medical advice).'
     ]
   },
   {
     kicker: 'Step 4 of 4 · Footer row',
-    title: 'Dataset snapshot & hourly risk',
+    title: 'Bottom panel',
     lines: [
-      'The **footer** is a single compact row. **Total accidents**, **Fatalities**, **Dataset records**, and **Worst state** are from the **whole CSV** — they do **not** use the filter pills.',
-      '**Risk by hour** sits **immediately to the right of Dataset records**: that mini chart **does** follow your filters, like the map.'
+      'On the bottom, you can see **Total accidents**, **Fatalities**, **Dataset records**, and the **state with the most number of accidents** from the whole dataset.',
+      'The **Risk by hour** graph follows the filters, like the map and shows trends over the time of the day.'
     ]
   }
 ]
