@@ -30,6 +30,7 @@ export default function ExplorerPage() {
   const [filteredRows, setFilteredRows] = useState([])
   const [activeFilter, setActiveFilter] = useState('all')
   const [selectedLocation, setSelectedLocation] = useState(null)
+  const [railTab, setRailTab] = useState('states')
   const [liveStatus, setLiveStatus] = useState('loading')
   const [isLoading, setIsLoading] = useState(true)
   const [guideOpen, setGuideOpen] = useState(() => {
@@ -112,11 +113,23 @@ export default function ExplorerPage() {
 
         <div className="explorer-body">
           <div className="explorer-map-wrap">
-            <MapView rows={filteredRows} filter={activeFilter} onLocationClick={setSelectedLocation} />
+            <MapView
+              rows={filteredRows}
+              filter={activeFilter}
+              onLocationClick={(row) => {
+                setSelectedLocation(row)
+                setRailTab('insights')
+              }}
+            />
           </div>
 
           <div className="explorer-sidebar">
-            <ExplorerRightRail rows={filteredRows} locationData={selectedLocation} />
+            <ExplorerRightRail
+              rows={filteredRows}
+              locationData={selectedLocation}
+              railTab={railTab}
+              onRailTabChange={setRailTab}
+            />
           </div>
         </div>
 

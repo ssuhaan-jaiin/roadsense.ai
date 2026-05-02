@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useMemo, useState } from 'react'
+import React, { useId, useMemo } from 'react'
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip as ReTooltip, ResponsiveContainer,
   PieChart, Pie, Cell
@@ -23,14 +23,14 @@ const TABS = Object.freeze([
   { id: 'insights', label: 'Insights' }
 ])
 
-export default function ExplorerRightRail({ rows = [], locationData = null }) {
-  const [tab, setTab] = useState('states')
+export default function ExplorerRightRail({
+  rows = [],
+  locationData = null,
+  railTab,
+  onRailTabChange
+}) {
+  const tab = railTab
   const tablistId = useId()
-
-  useEffect(() => {
-    if (locationData == null) return
-    setTab('insights')
-  }, [locationData])
 
   const topStates = useMemo(
     () => getStateStats(rows).slice(0, 7).map((s) => ({ state: s.state, count: s.count })),
@@ -50,9 +50,10 @@ export default function ExplorerRightRail({ rows = [], locationData = null }) {
               role="tab"
               id={`${tablistId}-${t.id}`}
               aria-selected={selected}
-              tabIndex={selected ? 0 : -1}
+              tabIndex={0}
               className={`explorer-rail-tab ${selected ? 'is-active' : ''}`}
-              onClick={() => setTab(t.id)}
+              onPointerDown={(e) => e.stopPropagation()}
+              onClick={() => onRailTabChange(t.id)}
             >
               {t.label}
             </button>
