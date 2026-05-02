@@ -1,0 +1,15 @@
+# Render Blueprint — Web service for Gemini API only (frontend: Vercel/Netlify/GitHub Pages).
+# In Render Dashboard: connect repo, confirm rootDir/start match, add GEMINI_KEY.
+
+services:
+  - type: web
+    name: roadsense-ai-api
+    runtime: node
+    rootDir: server
+    buildCommand: npm install
+    startCommand: node index.js
+    envVars:
+      - key: NODE_VERSION
+        value: "20"
+      - key: GEMINI_KEY
+        sync: false
