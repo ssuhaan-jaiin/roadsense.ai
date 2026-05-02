@@ -1444,10 +1444,6 @@ body {
   white-space: nowrap;
 }
 
-.explorer > .topbar-wrap .topbar-status-text--live {
-  color: #7dffd9;
-}
-
 .explorer > .topbar-wrap .topbar-status-text--muted {
   color: #888888;
 }
@@ -1507,15 +1503,6 @@ body {
 
   .explorer > .topbar-wrap .topbar-status-compact {
     display: inline;
-  }
-
-  /* Keep full loading label readable on small screens */
-  .explorer > .topbar-wrap .topbar-status-text--loading .topbar-status-full {
-    display: inline;
-  }
-
-  .explorer > .topbar-wrap .topbar-status-text--loading .topbar-status-compact {
-    display: none;
   }
 
   .explorer > .topbar-wrap .github-btn-label {

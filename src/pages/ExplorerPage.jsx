@@ -7,7 +7,6 @@ import MetricCards from '../components/MetricCards'
 import SiteFooter from '../components/SiteFooter'
 import ExplorerGuideOverlay, { EXPLORER_GUIDE_STORAGE_KEY } from '../components/ExplorerGuideOverlay'
 import { loadData, filterRows } from '../data/loader'
-import { fetchDataGov } from '../services/dataGovApi'
 import { GITHUB_REPO_URL } from '../config/site'
 
 function LoadingScreen({ text = 'Parsing accident records…' }) {
@@ -31,7 +30,6 @@ export default function ExplorerPage() {
   const [activeFilter, setActiveFilter] = useState('all')
   const [selectedLocation, setSelectedLocation] = useState(null)
   const [railTab, setRailTab] = useState('states')
-  const [liveStatus, setLiveStatus] = useState('loading')
   const [isLoading, setIsLoading] = useState(true)
   const [guideOpen, setGuideOpen] = useState(() => {
     try {
@@ -68,16 +66,6 @@ export default function ExplorerPage() {
         setIsLoading(false)
       })
 
-    fetchDataGov('/status')
-      .then((res) => {
-        if (!mounted) return
-        const s = res && res.data && res.data.status ? res.data.status : 'offline'
-        setLiveStatus(s)
-      })
-      .catch(() => {
-        if (mounted) setLiveStatus('offline')
-      })
-
     return () => {
       mounted = false
     }
@@ -106,7 +94,6 @@ export default function ExplorerPage() {
         <TopBar
           activeFilter={activeFilter}
           onFilterChange={setActiveFilter}
-          liveStatus={liveStatus}
           githubUrl={GITHUB_REPO_URL}
           homeLink
         />

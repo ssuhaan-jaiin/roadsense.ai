@@ -7,7 +7,6 @@ const FILTERS = ['All', 'Highway', 'Urban', 'Weather', 'Night']
 export default function TopBar({
   activeFilter = 'all',
   onFilterChange = () => {},
-  liveStatus = 'offline',
   githubUrl = '',
   homeLink = false
 }) {
@@ -111,33 +110,11 @@ export default function TopBar({
       {/* Right: Live badge + GitHub */}
       <div className="topbar-right">
         <div className="topbar-status" role="status">
-          {liveStatus === 'live' && (
-            <>
-              <span className="live-dot pulse" style={{ background: '#0FFFA1' }} aria-hidden="true" />
-              <span className="topbar-status-text topbar-status-text--live">
-                <span className="topbar-status-full">Live · NCRB 2023</span>
-                <span className="topbar-status-compact">Live</span>
-              </span>
-            </>
-          )}
-          {liveStatus === 'offline' && (
-            <>
-              <span className="live-dot" style={{ background: '#888' }} aria-hidden="true" />
-              <span className="topbar-status-text topbar-status-text--muted">
-                <span className="topbar-status-full">Kaggle · 20k records</span>
-                <span className="topbar-status-compact">20k CSV</span>
-              </span>
-            </>
-          )}
-          {liveStatus === 'loading' && (
-            <>
-              <span className="live-dot pulse-fast" style={{ background: '#444' }} aria-hidden="true" />
-              <span className="topbar-status-text topbar-status-text--muted topbar-status-text--loading">
-                <span className="topbar-status-full">Loading…</span>
-                <span className="topbar-status-compact">…</span>
-              </span>
-            </>
-          )}
+          <span className="live-dot" style={{ background: '#888' }} aria-hidden="true" />
+          <span className="topbar-status-text topbar-status-text--muted">
+            <span className="topbar-status-full">Kaggle · 20k records</span>
+            <span className="topbar-status-compact">20k CSV</span>
+          </span>
         </div>
 
         <button
