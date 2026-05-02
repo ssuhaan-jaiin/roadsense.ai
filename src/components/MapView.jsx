@@ -84,8 +84,13 @@ export default function MapView({ rows = [], filter = 'all', onLocationClick = (
   }, [filteredRows])
 
   return (
-    <div style={{ height: '100%', width: '100%', minHeight: 360 }}>
-      <MapContainer center={[20.5937, 78.9629]} zoom={5} style={{ height: '100%', width: '100%', minHeight: 360 }}>
+    <div className="map-view-root">
+      <MapContainer
+        center={[20.5937, 78.9629]}
+        zoom={5}
+        className="map-view-leaflet"
+        style={{ height: '100%', width: '100%' }}
+      >
         <TileLayer
           url="https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}.png"
           attribution='&copy; <a href="https://carto.com">CARTO</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a>'

@@ -11,7 +11,12 @@ export const GITHUB_REPO_URL =
 /** Footer & contact — replace with `VITE_*` in `.env.local` */
 
 /** Personal or portfolio website */
-export const CONTACT_WEBSITE_URL = env('VITE_CONTACT_WEBSITE_URL') || 'https://YOURDOMAIN.example'
+export const CONTACT_WEBSITE_URL =
+  env('VITE_CONTACT_WEBSITE_URL', '') || 'https://ssuhaan.dev'
+
+/** Public contact email — mailto link in footer */
+export const CONTACT_EMAIL =
+  env('VITE_CONTACT_EMAIL', '') || 'ssuhaan.jaiin@kcl.ac.uk'
 
 /** LinkedIn profile */
 export const LINKEDIN_URL = env('VITE_LINKEDIN_URL') || 'https://www.linkedin.com/in/YOURPROFILE'

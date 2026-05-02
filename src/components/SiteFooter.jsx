@@ -1,10 +1,29 @@
 import React from 'react'
 import {
   CONTACT_WEBSITE_URL,
+  CONTACT_EMAIL,
   LINKEDIN_URL,
   GITHUB_CONTACT_URL,
   isPlaceholderContactHref
 } from '../config/site'
+
+function IconMail({ className }) {
+  return (
+    <svg
+      className={className}
+      width="18"
+      height="18"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.65"
+      aria-hidden
+    >
+      <rect x="2" y="4" width="20" height="16" rx="2" strokeLinecap="round" strokeLinejoin="round" />
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 01-2.06 0L2 7" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
+  )
+}
 
 function IconGlobe({ className }) {
   return (
@@ -32,19 +51,34 @@ function IconGitHub({ className }) {
 }
 
 export default function SiteFooter() {
+  const email = typeof CONTACT_EMAIL === 'string' ? CONTACT_EMAIL.trim() : ''
+
   const items = [
-    { href: CONTACT_WEBSITE_URL, label: 'Website', Icon: IconGlobe },
-    { href: LINKEDIN_URL, label: 'LinkedIn', Icon: IconLinkedIn },
-    { href: GITHUB_CONTACT_URL, label: 'GitHub', Icon: IconGitHub }
-  ].filter((x) => typeof x.href === 'string' && x.href.trim().length > 0 && !isPlaceholderContactHref(x.href))
+    ...(email.includes('@')
+      ? [{ href: `mailto:${email}`, label: 'Email', Icon: IconMail, external: false }]
+      : []),
+    { href: CONTACT_WEBSITE_URL, label: 'Website', Icon: IconGlobe, external: true },
+    { href: LINKEDIN_URL, label: 'LinkedIn', Icon: IconLinkedIn, external: true },
+    { href: GITHUB_CONTACT_URL, label: 'GitHub', Icon: IconGitHub, external: true }
+  ].filter(
+    (x) =>
+      typeof x.href === 'string' &&
+      x.href.trim().length > 0 &&
+      (x.external === false ? true : !isPlaceholderContactHref(x.href))
+  )
 
   return (
     <footer className="site-footer">
       <div className="site-footer-inner">
         <p className="site-footer-title">Contact</p>
         <nav className="site-footer-links" aria-label="Contact links">
-          {items.map(({ href, label, Icon }) => (
-            <a key={label} href={href} target="_blank" rel="noopener noreferrer" className="site-footer-btn">
+          {items.map(({ href, label, Icon, external }) => (
+            <a
+              key={label}
+              href={href}
+              {...(external !== false ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              className="site-footer-btn"
+            >
               <Icon className="site-footer-btn-icon" />
               <span>{label}</span>
             </a>

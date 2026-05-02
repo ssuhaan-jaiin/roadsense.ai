@@ -4,6 +4,7 @@ import TopBar from '../components/TopBar'
 import MapView from '../components/MapView'
 import ExplorerRightRail from '../components/ExplorerRightRail'
 import MetricCards from '../components/MetricCards'
+import SiteFooter from '../components/SiteFooter'
 import ExplorerGuideOverlay, { EXPLORER_GUIDE_STORAGE_KEY } from '../components/ExplorerGuideOverlay'
 import { loadData, filterRows } from '../data/loader'
 import { fetchDataGov } from '../services/dataGovApi'
@@ -121,6 +122,8 @@ export default function ExplorerPage() {
 
         <MetricCards rows={rows} filteredRows={filteredRows} />
       </section>
+
+      <SiteFooter />
 
       {isLoading && <LoadingScreen />}
 

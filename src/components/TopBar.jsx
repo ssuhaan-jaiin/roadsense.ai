@@ -47,7 +47,7 @@ export default function TopBar({
       `}</style>
 
       {/* Left: Logo */}
-      <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+      <div className="topbar-left">
         {homeLink ? (
           <Link to="/" className="topbar-logo-link" title="Home & about">
             {logoOk && (
@@ -92,7 +92,7 @@ export default function TopBar({
       </div>
 
       {/* Center: Filters */}
-      <div style={{ display: 'flex', gap: 11, alignItems: 'center' }}>
+      <div className="topbar-filters" role="toolbar" aria-label="Map filters">
         {FILTERS.map(label => {
           const type = normalize(label)
           const isActive = normalize(activeFilter) === type
@@ -109,37 +109,48 @@ export default function TopBar({
       </div>
 
       {/* Right: Live badge + GitHub */}
-      <div style={{ display: 'flex', gap: 12, alignItems: 'center' }}>
-        <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-          {/* Live badge */}
-          <div style={{ display: 'flex', gap: 8, alignItems: 'center' }}>
-            {liveStatus === 'live' && (
-              <>
-                <span className="live-dot pulse" style={{ background: '#0FFFA1' }} aria-hidden="true" />
-                <span style={{ color: '#7dffd9', fontSize: 12 }}>Live · NCRB 2023</span>
-              </>
-            )}
-            {liveStatus === 'offline' && (
-              <>
-                <span className="live-dot" style={{ background: '#888' }} aria-hidden="true" />
-                <span style={{ color: '#888888', fontSize: 12 }}>Kaggle · 20k records</span>
-              </>
-            )}
-            {liveStatus === 'loading' && (
-              <>
-                <span className="live-dot pulse-fast" style={{ background: '#444' }} aria-hidden="true" />
-                <span style={{ color: '#888888', fontSize: 12 }}>Loading…</span>
-              </>
-            )}
-          </div>
+      <div className="topbar-right">
+        <div className="topbar-status" role="status">
+          {liveStatus === 'live' && (
+            <>
+              <span className="live-dot pulse" style={{ background: '#0FFFA1' }} aria-hidden="true" />
+              <span className="topbar-status-text topbar-status-text--live">
+                <span className="topbar-status-full">Live · NCRB 2023</span>
+                <span className="topbar-status-compact">Live</span>
+              </span>
+            </>
+          )}
+          {liveStatus === 'offline' && (
+            <>
+              <span className="live-dot" style={{ background: '#888' }} aria-hidden="true" />
+              <span className="topbar-status-text topbar-status-text--muted">
+                <span className="topbar-status-full">Kaggle · 20k records</span>
+                <span className="topbar-status-compact">20k CSV</span>
+              </span>
+            </>
+          )}
+          {liveStatus === 'loading' && (
+            <>
+              <span className="live-dot pulse-fast" style={{ background: '#444' }} aria-hidden="true" />
+              <span className="topbar-status-text topbar-status-text--muted topbar-status-text--loading">
+                <span className="topbar-status-full">Loading…</span>
+                <span className="topbar-status-compact">…</span>
+              </span>
+            </>
+          )}
         </div>
 
-        {/* GitHub button */}
-        <button className="github-btn" onClick={handleGithub} title="Open GitHub">
+        <button
+          className="github-btn"
+          type="button"
+          onClick={handleGithub}
+          title="Open GitHub"
+          aria-label="RoadSense.ai on GitHub"
+        >
           <svg width="14" height="14" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden>
             <path fillRule="evenodd" clipRule="evenodd" d="M8 .198a8 8 0 00-2.53 15.59c.4.074.546-.174.546-.386 0-.19-.007-.693-.01-1.36-2.22.482-2.69-1.07-2.69-1.07-.364-.924-.89-1.17-.89-1.17-.727-.497.055-.487.055-.487.803.057 1.225.825 1.225.825.714 1.223 1.873.87 2.33.665.072-.517.28-.87.508-1.07-1.77-.201-3.63-.885-3.63-3.942 0-.87.31-1.583.824-2.142-.083-.202-.357-1.015.078-2.115 0 0 .672-.215 2.2.82A7.66 7.66 0 018 4.58c.68.003 1.366.092 2.005.27 1.528-1.035 2.198-.82 2.198-.82.437 1.1.163 1.913.08 2.115.515.56.822 1.273.822 2.142 0 3.066-1.865 3.738-3.642 3.934.287.247.543.735.543 1.48 0 1.07-.01 1.934-.01 2.197 0 .215.144.464.55.385A8.001 8.001 0 008 .197z" fill="#aaa"/>
           </svg>
-          <span>GitHub</span>
+          <span className="github-btn-label">GitHub</span>
         </button>
       </div>
     </div>
