@@ -1,5 +1,10 @@
 import React from 'react'
-import { CONTACT_WEBSITE_URL, LINKEDIN_URL, GITHUB_CONTACT_URL } from '../config/site'
+import {
+  CONTACT_WEBSITE_URL,
+  LINKEDIN_URL,
+  GITHUB_CONTACT_URL,
+  isPlaceholderContactHref
+} from '../config/site'
 
 function IconGlobe({ className }) {
   return (
@@ -31,7 +36,7 @@ export default function SiteFooter() {
     { href: CONTACT_WEBSITE_URL, label: 'Website', Icon: IconGlobe },
     { href: LINKEDIN_URL, label: 'LinkedIn', Icon: IconLinkedIn },
     { href: GITHUB_CONTACT_URL, label: 'GitHub', Icon: IconGitHub }
-  ].filter((x) => typeof x.href === 'string' && x.href.trim().length > 0)
+  ].filter((x) => typeof x.href === 'string' && x.href.trim().length > 0 && !isPlaceholderContactHref(x.href))
 
   return (
     <footer className="site-footer">

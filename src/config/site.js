@@ -18,3 +18,12 @@ export const LINKEDIN_URL = env('VITE_LINKEDIN_URL') || 'https://www.linkedin.co
 
 /** GitHub profile or organisation (shown in footer; repo uses `GITHUB_REPO_URL`) */
 export const GITHUB_CONTACT_URL = env('VITE_GITHUB_CONTACT_URL') || 'https://github.com/ssuhaan-jaiin'
+
+/**
+ * Footer links fall back to placeholder URLs if env is unset — those should not render as clickable.
+ */
+export function isPlaceholderContactHref(href) {
+  if (href == null || typeof href !== 'string') return true
+  const h = href.trim()
+  return /YOURDOMAIN\.example$/i.test(h) || /\/YOURPROFILE\/?$/i.test(h) || /YOURPROFILE/i.test(h)
+}
