@@ -1,4 +1,4 @@
-import React, { useId, useMemo, useState } from 'react'
+import React, { useEffect, useId, useMemo, useState } from 'react'
 import {
   BarChart, Bar, XAxis, YAxis, Tooltip as ReTooltip, ResponsiveContainer,
   PieChart, Pie, Cell
@@ -26,6 +26,11 @@ const TABS = Object.freeze([
 export default function ExplorerRightRail({ rows = [], locationData = null }) {
   const [tab, setTab] = useState('states')
   const tablistId = useId()
+
+  useEffect(() => {
+    if (locationData == null) return
+    setTab('insights')
+  }, [locationData])
 
   const topStates = useMemo(
     () => getStateStats(rows).slice(0, 7).map((s) => ({ state: s.state, count: s.count })),
