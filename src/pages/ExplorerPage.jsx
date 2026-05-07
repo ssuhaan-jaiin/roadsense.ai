@@ -79,49 +79,51 @@ export default function ExplorerPage() {
     <div className="explorer-page">
       <style>{`@keyframes load { 0%{width:0%} 50%{width:70%} 100%{width:100%} }`}</style>
 
-      <div className="explorer-nav-strip">
-        <div className="explorer-nav-strip-inner">
-          <Link to="/" className="explorer-back-link">
-            ← About & home
-          </Link>
-          <button type="button" className="explorer-tour-btn" onClick={() => setGuideOpen(true)}>
-            Show tour
-          </button>
+      <div className="explorer-dashboard-shell">
+        <div className="explorer-nav-strip">
+          <div className="explorer-nav-strip-inner">
+            <Link to="/" className="explorer-back-link">
+              ← About & home
+            </Link>
+            <button type="button" className="explorer-tour-btn" onClick={() => setGuideOpen(true)}>
+              Show tour
+            </button>
+          </div>
         </div>
+
+        <section className="explorer" aria-label="Data explorer">
+          <TopBar
+            activeFilter={activeFilter}
+            onFilterChange={setActiveFilter}
+            githubUrl={GITHUB_REPO_URL}
+            homeLink
+          />
+
+          <div className="explorer-body">
+            <div className="explorer-map-wrap">
+              <MapView
+                rows={filteredRows}
+                filter={activeFilter}
+                onLocationClick={(row) => {
+                  setSelectedLocation(row)
+                  setRailTab('insights')
+                }}
+              />
+            </div>
+
+            <div className="explorer-sidebar">
+              <ExplorerRightRail
+                rows={filteredRows}
+                locationData={selectedLocation}
+                railTab={railTab}
+                onRailTabChange={setRailTab}
+              />
+            </div>
+          </div>
+
+          <MetricCards rows={rows} filteredRows={filteredRows} />
+        </section>
       </div>
-
-      <section className="explorer" aria-label="Data explorer">
-        <TopBar
-          activeFilter={activeFilter}
-          onFilterChange={setActiveFilter}
-          githubUrl={GITHUB_REPO_URL}
-          homeLink
-        />
-
-        <div className="explorer-body">
-          <div className="explorer-map-wrap">
-            <MapView
-              rows={filteredRows}
-              filter={activeFilter}
-              onLocationClick={(row) => {
-                setSelectedLocation(row)
-                setRailTab('insights')
-              }}
-            />
-          </div>
-
-          <div className="explorer-sidebar">
-            <ExplorerRightRail
-              rows={filteredRows}
-              locationData={selectedLocation}
-              railTab={railTab}
-              onRailTabChange={setRailTab}
-            />
-          </div>
-        </div>
-
-        <MetricCards rows={rows} filteredRows={filteredRows} />
-      </section>
 
       <SiteFooter />
 

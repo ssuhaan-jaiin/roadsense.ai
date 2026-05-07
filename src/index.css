@@ -965,21 +965,18 @@ body {
 /* —— Explorer page —— */
 .explorer-page {
   min-height: 100dvh;
-  height: 100dvh;
-  max-height: 100dvh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
   background: var(--bg-base);
 }
 
-@media (max-width: 960px) {
-  .explorer-page {
-    height: auto;
-    max-height: none;
-    overflow: visible;
-    min-height: 100dvh;
-  }
+/* Keeps map + metrics at full viewport height; contact footer sits below the fold (page scroll). */
+.explorer-dashboard-shell {
+  display: flex;
+  flex-direction: column;
+  flex: 1 0 auto;
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .explorer-nav-strip {
