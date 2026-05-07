@@ -137,18 +137,23 @@ app.post('/api/gemini-insights', async (req, res) => {
     const { locationData } = req.body || {}
   // Build a single prompt string combining system instructions and location context
   const promptLines = []
-  promptLines.push('Context: The user sees statistics from a HISTORICAL ROAD ACCIDENT dataset (human-driven conventional vehicles dominate; these are NOT mostly autonomous vehicle crashes unless data says otherwise).')
-  promptLines.push('You specialise in Indian road safety and how such patterns intersect with eventual autonomous/mixed fleets — frame insights as probabilistic scenarios, never as if every incident involved AVs.')
-  promptLines.push('Respond with exactly 3 bullet points, max 18 words each. No preamble.')
-  promptLines.push('Bullet 1: perception, traffic mix, or environment challenge AVs AND humans face here.')
-  promptLines.push('Bullet 2: dominant high-risk collision pattern implied by these stats.')
-  promptLines.push('Bullet 3: one concrete infrastructure or policy lever for safer roads.')
-  promptLines.push('Format: produce exactly three lines starting with •')
-  promptLines.push('')
-  promptLines.push(`State/City: ${locationData?.name || ''}`)
-  promptLines.push(`Accidents: ${locationData?.count || ''} | Top cause: ${locationData?.topCause || ''}`)
-  promptLines.push(`Weather condition: ${locationData?.topWeather || ''} | Avg risk: ${locationData?.avgRiskScore || ''}`)
-  promptLines.push(`Road type context: ${locationData?.roadType || ''}`)
+
+promptLines.push('Context: The user sees statistics from a MULTI-FACTOR ROAD ACCIDENT dataset across major Indian cities (2022–2025). These reflect real-world traffic crashes influenced by humans, infrastructure, weather, and contextual factors.')
+promptLines.push('You specialise in Indian road safety analytics. Interpret patterns in terms of probabilistic risk factors (traffic, weather, infrastructure, time), not assumptions about autonomous vehicles.')
+promptLines.push('Respond with exactly 3 bullet points, max 18 words each. No preamble.')
+promptLines.push('Bullet 1: key interaction between traffic conditions, weather, visibility, or time affecting risk.')
+promptLines.push('Bullet 2: dominant accident pattern implied (severity, peak hours, density, road type, or collisions).')
+promptLines.push('Bullet 3: one concrete infrastructure, enforcement, or policy lever to reduce risk.')
+promptLines.push('Format: exactly three lines starting with •')
+promptLines.push('')
+
+promptLines.push(`City: ${locationData?.name || ''}`)
+promptLines.push(`Accidents: ${locationData?.count || ''} | Top severity: ${locationData?.topSeverity || ''}`)
+promptLines.push(`Top factor: ${locationData?.topCause || ''} | Risk score: ${locationData?.avgRiskScore || ''}`)
+promptLines.push(`Weather: ${locationData?.topWeather || ''} | Visibility: ${locationData?.visibility || ''}`)
+promptLines.push(`Road type: ${locationData?.roadType || ''} | Traffic density: ${locationData?.trafficDensity || ''}`)
+promptLines.push(`Temporal pattern: ${locationData?.peakHour || ''} | Weekend: ${locationData?.weekend || ''}`)
+promptLines.push(`Contextual factors: ${locationData?.festival || ''}`)
   const prompt = promptLines.join('\n')
 
     const apiKey = geminiApiKey()
